@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Digital Twin | Advanced Algorithmic Therapy</title>
+    <title>Digital Twin | Advanced Clinical Simulator</title>
     
-    <!-- Premium Apple-Like Font (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS with Dark Mode Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'] }
-                }
-            }
+            theme: { extend: { fontFamily: { sans: ['Inter', '-apple-system', 'sans-serif'] } } }
         }
     </script>
     
@@ -27,191 +21,170 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Smooth scrolling and Apple-like scrollbars */
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .dark ::-webkit-scrollbar-thumb { background: #475569; }
-        
-        /* Premium Glassmorphism Effects */
-        .glass { 
-            background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .dark .glass { 
-            background: rgba(15, 23, 42, 0.85); 
-            border-color: #334155;
-        }
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15, 23, 42, 0.85); border-color: #334155; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans h-screen flex flex-col overflow-hidden transition-colors duration-300">
 
     <!-- HEADER -->
-    <header class="bg-slate-900 dark:bg-black text-white p-4 shadow-lg z-20 flex flex-col sm:flex-row justify-between items-center shrink-0 border-b-4 border-indigo-500">
-        <div class="mb-3 sm:mb-0 text-center sm:text-left w-full sm:w-auto">
-            <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white">Evolution of Digital Twins<span class="text-indigo-400">.</span>[cite: 1]</h1>
-            <p class="text-xs sm:text-sm text-slate-400">Advancing Personalized Combination Therapy[cite: 1]</p>
+    <header class="bg-slate-900 dark:bg-black text-white p-3 sm:p-4 shadow-lg z-20 flex justify-between items-center shrink-0 border-b-4 border-indigo-500">
+        <div>
+            <h1 class="text-lg sm:text-2xl font-black tracking-tight text-white">Digital Twin N-of-1 Simulator<span class="text-indigo-400">.</span></h1>
+            <p class="text-[10px] sm:text-sm text-slate-400">Algorithmic Combination Therapy & Pharmacodynamics</p>
         </div>
         
-        <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-            <!-- Dark Mode Toggle -->
+        <div class="flex items-center gap-4">
             <button id="theme-toggle" class="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-yellow-400 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner">
-                <i id="theme-icon" class="fa-solid fa-moon w-5 h-5 flex items-center justify-center"></i>
+                <i id="theme-icon" class="fa-solid fa-moon w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center"></i>
             </button>
-
-            <!-- Project Credits -->
-            <div class="text-right text-[10px] sm:text-xs text-slate-400 bg-slate-800 dark:bg-slate-900 p-2 rounded border border-slate-700 dark:border-slate-800">
-                <p class="text-white font-bold mb-0.5">ESPERANZA 2K26[cite: 1]</p>
-                <p>Lead: Ritesh | MRCP Pharm.D 2nd Yr[cite: 1]</p>
+            <div class="hidden sm:block text-right text-xs text-slate-400 bg-slate-800 dark:bg-slate-900 p-2 rounded border border-slate-700 dark:border-slate-800">
+                <p class="text-white font-bold mb-0.5">Pharm.D Clinical Project</p>
+                <p>MRCP Class of 2026</p>
             </div>
         </div>
     </header>
 
-    <!-- MAIN DASHBOARD (Responsive Flex-Col on Mobile, Flex-Row on Desktop) -->
     <div class="flex flex-col lg:flex-row flex-1 overflow-y-auto lg:overflow-hidden">
         
-        <!-- LEFT COLUMN: Patient Telemetry & Input -->
+        <!-- LEFT COLUMN: Patient Telemetry -->
         <aside class="w-full lg:w-1/3 bg-white dark:bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex flex-col lg:overflow-y-auto z-10 transition-colors duration-300">
-            <div class="p-5 sm:p-6">
-                <div class="flex items-center justify-between mb-6 border-b border-slate-100 dark:border-slate-800 pb-2">
-                    <h2 class="text-lg sm:text-xl font-bold text-slate-800 dark:text-white"><i class="fa-solid fa-server mr-2 text-indigo-500"></i>Clinical DB</h2>
-                    <span class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Live System</span>
+            <div class="p-4 sm:p-6 space-y-6">
+                
+                <div class="bg-indigo-50 dark:bg-slate-800/80 p-4 rounded-xl border border-indigo-100 dark:border-slate-700 transition-colors">
+                    <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wide mb-2"><i class="fa-solid fa-database mr-1"></i> Diagnosis Profile (20 Models)</label>
+                    <select id="disease-type" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm p-2.5 font-medium appearance-none cursor-pointer">
+                        <optgroup label="Oncology">
+                            <option value="onc_nsclc">Non-Small Cell Lung Cancer</option>
+                            <option value="onc_breast">Triple-Negative Breast Cancer</option>
+                            <option value="onc_aml">Acute Myeloid Leukemia</option>
+                            <option value="onc_gbm">Glioblastoma Multiforme</option>
+                        </optgroup>
+                        <optgroup label="Infectious Disease">
+                            <option value="inf_mdrtb">MDR Tuberculosis</option>
+                            <option value="inf_mrsa">MRSA Sepsis</option>
+                            <option value="inf_pseudomonas">Pan-Resistant Pseudomonas</option>
+                            <option value="inf_hiv">HIV-1 (Treatment Naive)</option>
+                            <option value="inf_candidiasis">Invasive Candidiasis</option>
+                        </optgroup>
+                        <optgroup label="Cardiology">
+                            <option value="cardio_hf">Congestive Heart Failure (HFrEF)</option>
+                            <option value="cardio_afib">Atrial Fibrillation (RVR)</option>
+                            <option value="cardio_stemi">Acute Myocardial Infarction</option>
+                        </optgroup>
+                        <optgroup label="Neurology & Psychiatry">
+                            <option value="neuro_epilepsy">Refractory Status Epilepticus</option>
+                            <option value="neuro_parkinsons">Parkinson's (Advanced)</option>
+                            <option value="psych_schizo">Treatment-Resistant Schizophrenia</option>
+                        </optgroup>
+                        <optgroup label="Autoimmune & Transplant">
+                            <option value="auto_ra">Severe Rheumatoid Arthritis</option>
+                            <option value="auto_lupus">Lupus Nephritis</option>
+                            <option value="trans_renal">Post-Renal Transplant</option>
+                        </optgroup>
+                        <optgroup label="Endo & Gastro">
+                            <option value="endo_dka">Diabetic Ketoacidosis (DKA)</option>
+                            <option value="gi_crohns">Severe Crohn's Disease</option>
+                        </optgroup>
+                    </select>
                 </div>
                 
-                <form id="patient-form" class="space-y-6">
-                    <!-- Database Selection -->
-                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
-                        <label class="block text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide mb-2">Diagnosis Profile</label>
-                        <select id="disease-type" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 font-medium transition-colors appearance-none">
-                            <optgroup label="Oncology">
-                                <option value="onc_nsclc">Non-Small Cell Lung Cancer (Adv)</option>
-                                <option value="onc_breast">Triple-Negative Breast Cancer</option>
-                                <option value="onc_leukemia">Acute Myeloid Leukemia (AML)</option>
-                            </optgroup>
-                            <optgroup label="Infectious Disease">
-                                <option value="inf_mdrtb">Multi-Drug Resistant TB (MDR-TB)</option>
-                                <option value="inf_mrsa">MRSA Sepsis</option>
-                                <option value="inf_pseudomonas">Pan-resistant Pseudomonas</option>
-                            </optgroup>
-                            <optgroup label="Cardiology & Neuro">
-                                <option value="cardio_hf">Congestive Heart Failure (HFrEF)</option>
-                                <option value="neuro_epilepsy">Refractory Status Epilepticus</option>
-                            </optgroup>
-                        </select>
+                <!-- Telemetry: Vitals -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2"><i class="fa-solid fa-heart-pulse text-rose-500 mr-1"></i> Real-Time Vitals</h3>
+                    <div class="grid grid-cols-2 gap-2 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">HR (bpm)</label><input type="number" id="vit-hr" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">BP</label><input type="text" id="vit-bp" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">SpO2 (%)</label><input type="number" id="vit-spo2" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">Temp (°C)</label><input type="number" step="0.1" id="vit-temp" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
                     </div>
-                    
-                    <!-- Comprehensive Vitals -->
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3"><i class="fa-solid fa-heart-pulse text-rose-500 mr-1"></i> Telemetry</h3>
-                        <div class="grid grid-cols-2 gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">HR (bpm)</label>
-                                <input type="number" id="vitals-hr" class="mt-1 w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2 text-sm font-mono shadow-inner transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">BP</label>
-                                <input type="text" id="vitals-bp" class="mt-1 w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2 text-sm font-mono shadow-inner transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">SpO2 (%)</label>
-                                <input type="number" id="vitals-spo2" max="100" class="mt-1 w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2 text-sm font-mono shadow-inner transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Temp (°C)</label>
-                                <input type="number" step="0.1" id="vitals-temp" class="mt-1 w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2 text-sm font-mono shadow-inner transition-colors">
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- Severity Slider -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Disease Severity</label>
-                        <div class="flex items-center space-x-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-                            <span class="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-bold uppercase">Stable</span>
-                            <input type="range" id="severity-slider" min="0" max="100" value="50" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
-                            <span class="text-[10px] sm:text-xs text-rose-600 dark:text-rose-400 font-bold uppercase">Critical</span>
-                        </div>
+                <!-- Telemetry: Labs -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2"><i class="fa-solid fa-vial text-emerald-500 mr-1"></i> Laboratory Diagnostics</h3>
+                    <div class="grid grid-cols-3 gap-2 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">WBC (K/uL)</label><input type="number" step="0.1" id="lab-wbc" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">Hgb (g/dL)</label><input type="number" step="0.1" id="lab-hgb" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">Plt (K/uL)</label><input type="number" id="lab-plt" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
+                        <div><label class="block text-[10px] font-bold text-slate-500 uppercase">SCr (mg/dL)</label><input type="number" step="0.1" id="lab-scr" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono text-rose-600 dark:text-rose-400 font-bold"></div>
+                        <div class="col-span-2"><label class="block text-[10px] font-bold text-slate-500 uppercase">ALT / AST (U/L)</label><input type="text" id="lab-lft" class="mt-1 w-full rounded border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-1.5 text-xs font-mono"></div>
                     </div>
+                </div>
 
-                    <button type="button" id="sync-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 flex justify-center items-center">
-                        <i class="fa-solid fa-arrows-rotate mr-2"></i> Recalibrate Twin
-                    </button>
-                </form>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Disease Progression State</label>
+                    <div class="flex items-center space-x-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase">Stable</span>
+                        <input type="range" id="severity-slider" min="0" max="100" value="50" class="w-full h-1 bg-slate-300 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        <span class="text-[10px] text-rose-600 dark:text-rose-400 font-bold uppercase">Critical</span>
+                    </div>
+                </div>
+
+                <button id="sync-btn" class="w-full bg-slate-900 dark:bg-slate-700 hover:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md active:scale-95 text-sm uppercase tracking-wide">
+                    <i class="fa-solid fa-satellite-dish mr-2"></i> Sync Telemetry & Recalibrate
+                </button>
             </div>
         </aside>
 
-        <!-- RIGHT COLUMN: AI Output Dashboard -->
-        <main class="w-full lg:w-2/3 bg-slate-100 dark:bg-slate-950 p-4 sm:p-6 lg:overflow-y-auto space-y-6 relative transition-colors duration-300">
+        <!-- RIGHT COLUMN: AI Dashboards -->
+        <main class="w-full lg:w-2/3 bg-slate-100 dark:bg-slate-950 p-4 sm:p-6 lg:overflow-y-auto space-y-6">
             
             <!-- IDENTIF.AI MODULE -->
-            <section class="glass p-5 sm:p-6 rounded-2xl border-l-4 border-l-indigo-500 border border-slate-200/50 shadow-sm relative overflow-hidden">
-                <div class="absolute -top-4 -right-4 p-4 opacity-5 dark:opacity-10 pointer-events-none">
-                    <i class="fa-solid fa-network-wired text-8xl text-indigo-900 dark:text-indigo-100"></i>
-                </div>
-                <div class="relative z-10">
-                    <h3 class="text-lg sm:text-xl font-black text-indigo-900 dark:text-indigo-400 tracking-tight uppercase">Identif.AI[cite: 1]</h3>
-                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-4 font-medium">Combinatorial Optimization Selection[cite: 1]</p>
-                    
-                    <div class="bg-slate-900 dark:bg-black rounded-xl p-4 sm:p-5 border border-slate-800 shadow-inner text-green-400 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-                        <p class="text-slate-500 mb-1">> Target Phenotype Isolated.</p>
-                        <div class="mt-3 border-t border-slate-800 pt-3">
-                            <p>> <span class="text-slate-400">Diagnosis:</span> <span id="out-disease" class="text-white font-bold">...</span></p>
-                            <p class="mt-3">> <span class="text-slate-400">Optimized Regimen:</span></p>
-                            <div class="bg-slate-800/50 p-3 mt-2 rounded-lg border border-slate-700/50">
-                                <span id="out-cocktail" class="text-yellow-400 font-bold tracking-wide">...</span>
-                            </div>
-                            <p class="mt-3 text-[10px] sm:text-xs text-slate-500">> Rationale: <span id="out-rationale" class="text-slate-400">...</span></p>
-                        </div>
+            <section class="glass p-5 rounded-2xl border-l-4 border-l-indigo-500 border border-slate-200/50 shadow-sm relative">
+                <h3 class="text-lg font-black text-indigo-900 dark:text-indigo-400 uppercase">Identif.AI Discovery Engine</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 font-medium">Combinatorial Optimization & Precise Dosing Output</p>
+                
+                <div class="bg-slate-900 dark:bg-black rounded-xl p-4 border border-slate-800 shadow-inner text-green-400 font-mono text-xs leading-relaxed overflow-x-auto">
+                    <p class="text-slate-500">> <span class="text-slate-300">Target:</span> <span id="out-disease" class="text-white font-bold text-sm">...</span></p>
+                    <div class="mt-3 border-t border-slate-800 pt-3">
+                        <p class="mb-2">> Optimized Polypharmacy Regimen & Initial Dosages:</p>
+                        <ul id="out-cocktail" class="bg-slate-800/50 p-3 rounded border border-slate-700 space-y-1 text-yellow-300">
+                            <!-- Populated dynamically -->
+                        </ul>
+                        <p class="mt-3 text-[10px] text-slate-400">> Pharmacodynamic Rationale: <span id="out-rationale" class="text-slate-300">...</span></p>
                     </div>
                 </div>
             </section>
 
             <!-- CURATE.AI MODULE -->
-            <section class="glass p-5 sm:p-6 rounded-2xl border-l-4 border-l-emerald-500 border border-slate-200/50 shadow-sm">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-4 gap-3">
+            <section class="glass p-5 rounded-2xl border-l-4 border-l-emerald-500 border border-slate-200/50 shadow-sm">
+                <div class="flex justify-between items-end mb-4">
                     <div>
-                        <h3 class="text-lg sm:text-xl font-black text-emerald-900 dark:text-emerald-400 tracking-tight uppercase">CURATE.AI[cite: 1]</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">Dynamic N-of-1 Dose Calibration[cite: 1]</p>
+                        <h3 class="text-lg font-black text-emerald-900 dark:text-emerald-400 uppercase">CURATE.AI Personalization</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">Dynamic N-of-1 Primary Agent Calibration</p>
                     </div>
-                    <div id="zone-badge" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-sm transition-all duration-300 whitespace-nowrap">
+                    <div id="zone-badge" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[10px] uppercase tracking-wider transition-all duration-300">
                         Awaiting Input
                     </div>
                 </div>
 
-                <!-- Interactive Chart Container (Responsive Aspect Ratio) -->
-                <div class="bg-white dark:bg-slate-900 p-2 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner relative mb-6 transition-colors duration-300 w-full aspect-video sm:aspect-auto sm:h-64">
+                <div class="bg-white dark:bg-slate-900 p-2 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner relative mb-6 w-full aspect-video sm:aspect-auto sm:h-56">
                     <canvas id="doseChart"></canvas>
-                    
-                    <!-- HUD Overlays (Hidden on very small mobile, visible on sm+) -->
-                    <div class="hidden sm:block absolute top-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur p-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-md text-sm min-w-[140px] transition-colors">
-                        <div class="flex justify-between mb-1 pb-1 border-b border-slate-100 dark:border-slate-700">
-                            <span class="text-slate-500 dark:text-slate-400 font-bold text-[10px] uppercase">Efficacy</span>
+                    <div class="absolute top-2 right-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur p-2 rounded border border-slate-200 dark:border-slate-700 shadow-md text-xs min-w-[120px]">
+                        <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-1 mb-1">
+                            <span class="text-slate-500 dark:text-slate-400 font-bold uppercase">Efficacy</span>
                             <span id="hud-eff" class="font-bold text-emerald-600 dark:text-emerald-400">0%</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-slate-500 dark:text-slate-400 font-bold text-[10px] uppercase">Toxicity</span>
+                            <span class="text-slate-500 dark:text-slate-400 font-bold uppercase">Toxicity</span>
                             <span id="hud-tox" class="font-bold text-rose-600 dark:text-rose-400">0%</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Master Dosing Controller -->
-                <div class="bg-slate-50 dark:bg-slate-800/50 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
-                    <label class="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide mb-6 text-center">
-                        Modulate Drug Intensity[cite: 1]
-                    </label>
-                    
-                    <div class="relative px-2">
-                        <input type="range" id="dose-slider" min="0" max="250" value="0" class="w-full h-3 bg-slate-300 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-500/30 transition-all">
-                    </div>
-                    
-                    <div class="flex justify-between items-center mt-6 text-slate-500 dark:text-slate-400 font-mono font-bold text-xs sm:text-sm">
+                <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase text-center mb-4">Modulate Primary Agent Intensity</label>
+                    <input type="range" id="dose-slider" min="0" max="250" value="0" class="w-full h-3 bg-slate-300 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-500/30">
+                    <div class="flex justify-between items-center mt-4 text-slate-500 dark:text-slate-400 font-mono text-xs">
                         <span>0 mg</span>
-                        <div class="bg-white dark:bg-slate-900 px-4 sm:px-8 py-2 sm:py-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center transition-colors">
-                            <span class="text-[10px] uppercase tracking-widest block text-slate-400 dark:text-slate-500 mb-1">Administered</span>
-                            <span id="hud-dose" class="text-2xl sm:text-4xl text-emerald-600 dark:text-emerald-400">0</span><span class="text-xs sm:text-sm ml-1 text-slate-500">mg</span>
+                        <div class="bg-white dark:bg-slate-900 px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm text-center">
+                            <span id="hud-dose" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">0</span><span class="ml-1 text-slate-500">mg</span>
                         </div>
                         <span>250 mg</span>
                     </div>
@@ -222,130 +195,199 @@
 
     <!-- MEGA DATABASE & LOGIC -->
     <script>
-        // 1. MEGA DATABASE
         const db = {
+            // ONCOLOGY
             onc_nsclc: {
                 name: "Non-Small Cell Lung Cancer (Advanced)",
-                vitals: { hr: 92, bp: "115/75", spo2: 94, temp: 37.2 },
-                cocktail: "[ Pembrolizumab + Pemetrexed + Carboplatin ]",
+                vit: { hr: 92, bp: "115/75", spo2: 94, temp: 37.2 },
+                lab: { wbc: 12.5, hgb: 10.2, plt: 150, scr: 1.1, lft: "45 / 50" },
+                cocktail: ["Pembrolizumab 200mg IV Q3W", "Pemetrexed 500mg/m² IV Day 1", "Carboplatin AUC 5 IV Day 1"],
                 rationale: "Synergistic immune checkpoint inhibition coupled with DNA synthesis disruption.",
                 curve: { peak: 140, cliff: 180, toxRate: 0.08 }
             },
             onc_breast: {
-                name: "Triple-Negative Breast Cancer",
-                vitals: { hr: 88, bp: "110/70", spo2: 98, temp: 36.9 },
-                cocktail: "[ Sacituzumab Govitecan + Pembrolizumab ]",
-                rationale: "Antibody-drug conjugate combined with PD-1 blockade.",
+                name: "Triple-Negative Breast Cancer (Metastatic)",
+                vit: { hr: 88, bp: "110/70", spo2: 98, temp: 36.9 },
+                lab: { wbc: 4.2, hgb: 9.5, plt: 120, scr: 0.9, lft: "65 / 72" },
+                cocktail: ["Sacituzumab Govitecan 10mg/kg IV Day 1, 8", "Pembrolizumab 200mg IV Q3W"],
+                rationale: "Antibody-drug conjugate targeting Trop-2 combined with PD-1 blockade.",
                 curve: { peak: 110, cliff: 140, toxRate: 0.12 }
             },
-            onc_leukemia: {
+            onc_aml: {
                 name: "Acute Myeloid Leukemia (AML)",
-                vitals: { hr: 105, bp: "100/60", spo2: 95, temp: 38.2 },
-                cocktail: "[ Venetoclax + Azacitidine ]",
+                vit: { hr: 105, bp: "100/60", spo2: 95, temp: 38.2 },
+                lab: { wbc: 45.0, hgb: 7.8, plt: 35, scr: 1.3, lft: "30 / 35" },
+                cocktail: ["Venetoclax 400mg PO Daily", "Azacitidine 75mg/m² SQ Days 1-7"],
                 rationale: "BCL-2 inhibition restoring apoptosis combined with hypomethylation.",
                 curve: { peak: 80, cliff: 100, toxRate: 0.15 } 
             },
+            onc_gbm: {
+                name: "Glioblastoma Multiforme",
+                vit: { hr: 85, bp: "135/85", spo2: 97, temp: 37.0 },
+                lab: { wbc: 8.5, hgb: 13.0, plt: 200, scr: 0.8, lft: "25 / 28" },
+                cocktail: ["Temozolomide 75mg/m² PO Daily", "Bevacizumab 10mg/kg IV Q2W"],
+                rationale: "Alkylating agent combined with anti-VEGF to reduce tumor angiogenesis and edema.",
+                curve: { peak: 160, cliff: 210, toxRate: 0.05 } 
+            },
+            // INFECTIOUS DISEASE
             inf_mdrtb: {
                 name: "Multi-Drug Resistant Tuberculosis",
-                vitals: { hr: 110, bp: "105/65", spo2: 91, temp: 38.7 },
-                cocktail: "[ Bedaquiline + Pretomanid + Linezolid ]",
+                vit: { hr: 110, bp: "105/65", spo2: 91, temp: 38.7 },
+                lab: { wbc: 15.2, hgb: 11.0, plt: 400, scr: 1.2, lft: "85 / 90" },
+                cocktail: ["Bedaquiline 400mg PO Daily (Wk 1-2)", "Pretomanid 200mg PO Daily", "Linezolid 600mg PO Daily"],
                 rationale: "Targeting ATP synthase and cell wall synthesis in highly resistant strains.",
                 curve: { peak: 120, cliff: 160, toxRate: 0.09 }
             },
             inf_mrsa: {
                 name: "MRSA Sepsis",
-                vitals: { hr: 125, bp: "85/50", spo2: 89, temp: 39.5 },
-                cocktail: "[ Vancomycin + Daptomycin ]",
-                rationale: "Overcoming thick cell wall phenotypes; requires intense monitoring.",
+                vit: { hr: 125, bp: "85/50", spo2: 89, temp: 39.5 },
+                lab: { wbc: 22.5, hgb: 10.5, plt: 95, scr: 2.1, lft: "120 / 140" },
+                cocktail: ["Vancomycin 15-20mg/kg IV Q8H (Target Trough 15-20)", "Daptomycin 8mg/kg IV Daily"],
+                rationale: "Overcoming thick cell wall phenotypes; requires intense renal monitoring.",
                 curve: { peak: 180, cliff: 190, toxRate: 0.2 } 
             },
             inf_pseudomonas: {
-                name: "Pan-resistant Pseudomonas",
-                vitals: { hr: 115, bp: "95/60", spo2: 93, temp: 38.9 },
-                cocktail: "[ Ceftolozane/Tazobactam + Tobramycin ]",
+                name: "Pan-resistant Pseudomonas aeruginosa",
+                vit: { hr: 115, bp: "95/60", spo2: 93, temp: 38.9 },
+                lab: { wbc: 18.0, hgb: 12.1, plt: 180, scr: 1.5, lft: "45 / 50" },
+                cocktail: ["Ceftolozane/Tazobactam 3g IV Q8H", "Tobramycin 7mg/kg IV Daily"],
                 rationale: "Cephalosporin/inhibitor combo acting synergistically with aminoglycosides.",
                 curve: { peak: 130, cliff: 155, toxRate: 0.11 }
             },
+            inf_hiv: {
+                name: "HIV-1 (High Viral Load, Tx Naive)",
+                vit: { hr: 80, bp: "120/80", spo2: 99, temp: 36.8 },
+                lab: { wbc: 3.5, hgb: 12.5, plt: 160, scr: 0.9, lft: "22 / 24" },
+                cocktail: ["Bictegravir 50mg PO Daily", "Emtricitabine 200mg PO Daily", "Tenofovir Alafenamide 25mg PO Daily"],
+                rationale: "Integrase strand transfer inhibition with dual NRTI backbone.",
+                curve: { peak: 50, cliff: 220, toxRate: 0.02 }
+            },
+            inf_candidiasis: {
+                name: "Invasive Candidiasis (Candida auris)",
+                vit: { hr: 105, bp: "100/65", spo2: 95, temp: 38.5 },
+                lab: { wbc: 16.5, hgb: 10.0, plt: 110, scr: 1.8, lft: "90 / 110" },
+                cocktail: ["Micafungin 100mg IV Daily", "Liposomal Amphotericin B 5mg/kg IV Daily"],
+                rationale: "Echinocandin cell wall disruption with polyene membrane targeting for resistant strains.",
+                curve: { peak: 100, cliff: 140, toxRate: 0.14 }
+            },
+            // CARDIOLOGY
             cardio_hf: {
                 name: "Congestive Heart Failure (HFrEF)",
-                vitals: { hr: 95, bp: "145/95", spo2: 92, temp: 36.6 },
-                cocktail: "[ Sacubitril/Valsartan + Dapagliflozin ]",
+                vit: { hr: 95, bp: "145/95", spo2: 92, temp: 36.6 },
+                lab: { wbc: 7.2, hgb: 13.5, plt: 250, scr: 1.6, lft: "55 / 60" },
+                cocktail: ["Sacubitril/Valsartan 49/51mg PO BID", "Dapagliflozin 10mg PO Daily", "Carvedilol 12.5mg PO BID"],
                 rationale: "Neprilysin inhibition plus SGLT2 diuresis/metabolic modulation.",
                 curve: { peak: 90, cliff: 140, toxRate: 0.07 }
             },
+            cardio_afib: {
+                name: "Atrial Fibrillation (Rapid Ventricular Rate)",
+                vit: { hr: 145, bp: "110/70", spo2: 96, temp: 37.0 },
+                lab: { wbc: 8.0, hgb: 14.2, plt: 210, scr: 1.0, lft: "25 / 30" },
+                cocktail: ["Diltiazem 15-20mg IV Bolus, then 5-15mg/hr", "Apixaban 5mg PO BID"],
+                rationale: "Rate control via calcium channel blockade with DOAC stroke prophylaxis.",
+                curve: { peak: 120, cliff: 170, toxRate: 0.08 }
+            },
+            cardio_stemi: {
+                name: "Acute Myocardial Infarction (Post-PCI)",
+                vit: { hr: 75, bp: "130/85", spo2: 98, temp: 36.8 },
+                lab: { wbc: 11.5, hgb: 15.0, plt: 280, scr: 1.1, lft: "140 / 180" },
+                cocktail: ["Ticagrelor 90mg PO BID", "Aspirin 81mg PO Daily", "Rosuvastatin 40mg PO Daily"],
+                rationale: "Dual antiplatelet therapy preventing stent thrombosis plus plaque stabilization.",
+                curve: { peak: 100, cliff: 150, toxRate: 0.09 } 
+            },
+            // NEURO & PSYCH
             neuro_epilepsy: {
                 name: "Refractory Status Epilepticus",
-                vitals: { hr: 130, bp: "150/90", spo2: 88, temp: 38.1 },
-                cocktail: "[ Levetiracetam + Lacosamide + Propofol ]",
-                rationale: "Synaptic vesicle binding combined with slow sodium channel inactivation.",
+                vit: { hr: 130, bp: "150/90", spo2: 88, temp: 38.1 },
+                lab: { wbc: 14.0, hgb: 13.8, plt: 300, scr: 1.2, lft: "45 / 50" },
+                cocktail: ["Levetiracetam 60mg/kg IV Bolus", "Lacosamide 400mg IV Bolus", "Propofol 2mg/kg IV Bolus (then drip)"],
+                rationale: "Synaptic vesicle binding combined with slow sodium channel inactivation and GABA agonism.",
                 curve: { peak: 190, cliff: 220, toxRate: 0.1 }
+            },
+            neuro_parkinsons: {
+                name: "Parkinson's Disease (Advanced)",
+                vit: { hr: 70, bp: "105/65", spo2: 98, temp: 36.7 },
+                lab: { wbc: 6.5, hgb: 14.0, plt: 220, scr: 0.9, lft: "20 / 22" },
+                cocktail: ["Carbidopa/Levodopa 25/100mg PO TID", "Entacapone 200mg PO with each C/L dose"],
+                rationale: "Dopamine replacement optimized with peripheral COMT inhibition.",
+                curve: { peak: 75, cliff: 130, toxRate: 0.06 }
+            },
+            psych_schizo: {
+                name: "Treatment-Resistant Schizophrenia",
+                vit: { hr: 98, bp: "115/75", spo2: 99, temp: 37.0 },
+                lab: { wbc: 8.8, hgb: 14.5, plt: 260, scr: 0.8, lft: "35 / 40" },
+                cocktail: ["Clozapine 300mg PO Daily", "Aripiprazole 15mg PO Daily"],
+                rationale: "Atypical D2/5-HT2A antagonism combined with partial D2 agonism.",
+                curve: { peak: 110, cliff: 140, toxRate: 0.15 } 
+            },
+            // AUTOIMMUNE & TRANSPLANT
+            auto_ra: {
+                name: "Severe Rheumatoid Arthritis",
+                vit: { hr: 82, bp: "125/80", spo2: 98, temp: 37.3 },
+                lab: { wbc: 9.5, hgb: 11.2, plt: 350, scr: 0.7, lft: "28 / 32" },
+                cocktail: ["Adalimumab 40mg SQ Q2W", "Methotrexate 15mg PO Weekly", "Folic Acid 1mg PO Daily"],
+                rationale: "TNF-alpha inhibition augmented by folate antimetabolite immunomodulation.",
+                curve: { peak: 60, cliff: 160, toxRate: 0.04 }
+            },
+            auto_lupus: {
+                name: "Systemic Lupus Erythematosus (Nephritis)",
+                vit: { hr: 90, bp: "140/95", spo2: 97, temp: 37.6 },
+                lab: { wbc: 3.8, hgb: 10.5, plt: 140, scr: 2.2, lft: "30 / 35" },
+                cocktail: ["Mycophenolate Mofetil 1g PO BID", "Hydroxychloroquine 200mg PO BID", "Prednisone 40mg PO Daily"],
+                rationale: "Inhibition of purine synthesis in lymphocytes plus toll-like receptor blockade.",
+                curve: { peak: 140, cliff: 190, toxRate: 0.07 }
+            },
+            trans_renal: {
+                name: "Post-Renal Transplant (Rejection Risk)",
+                vit: { hr: 85, bp: "135/85", spo2: 99, temp: 37.1 },
+                lab: { wbc: 7.0, hgb: 11.8, plt: 200, scr: 1.5, lft: "40 / 45" },
+                cocktail: ["Tacrolimus 0.1mg/kg PO Daily (Target Trough 8-10)", "Belatacept 5mg/kg IV Monthly"],
+                rationale: "Calcineurin inhibition combined with selective T-cell costimulation blockade.",
+                curve: { peak: 40, cliff: 65, toxRate: 0.18 }
+            },
+            // ENDO & GASTRO
+            endo_dka: {
+                name: "Diabetic Ketoacidosis (DKA)",
+                vit: { hr: 120, bp: "100/60", spo2: 98, temp: 36.5 },
+                lab: { wbc: 16.0, hgb: 15.2, plt: 280, scr: 1.8, lft: "25 / 30" },
+                cocktail: ["Regular Insulin 0.1 units/kg/hr IV Infusion", "Normal Saline 1L/hr IV", "Potassium Chloride 20mEq/L IV fluid"],
+                rationale: "Immediate reversal of ketogenesis and meticulous fluid/electrolyte gap correction.",
+                curve: { peak: 150, cliff: 180, toxRate: 0.1 } // Hypoglycemia cliff
+            },
+            gi_crohns: {
+                name: "Severe Crohn's Disease (Fistulizing)",
+                vit: { hr: 100, bp: "110/70", spo2: 98, temp: 37.8 },
+                lab: { wbc: 13.5, hgb: 9.8, plt: 410, scr: 0.8, lft: "20 / 25" },
+                cocktail: ["Infliximab 5mg/kg IV (Induction)", "Azathioprine 2.5mg/kg PO Daily"],
+                rationale: "Monoclonal TNF-a antibody synergy with thiopurine to induce mucosal healing.",
+                curve: { peak: 85, cliff: 150, toxRate: 0.08 }
             }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // UI Elements
             const htmlTag = document.documentElement;
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
-            
+            const themeToggle = document.getElementById('theme-toggle'), themeIcon = document.getElementById('theme-icon');
             const selectDisease = document.getElementById('disease-type');
-            const inputs = {
-                hr: document.getElementById('vitals-hr'),
-                bp: document.getElementById('vitals-bp'),
-                spo2: document.getElementById('vitals-spo2'),
-                temp: document.getElementById('vitals-temp')
-            };
             
-            const outputs = {
-                disease: document.getElementById('out-disease'),
-                cocktail: document.getElementById('out-cocktail'),
-                rationale: document.getElementById('out-rationale')
-            };
+            const vitInputs = { hr: document.getElementById('vit-hr'), bp: document.getElementById('vit-bp'), spo2: document.getElementById('vit-spo2'), temp: document.getElementById('vit-temp') };
+            const labInputs = { wbc: document.getElementById('lab-wbc'), hgb: document.getElementById('lab-hgb'), plt: document.getElementById('lab-plt'), scr: document.getElementById('lab-scr'), lft: document.getElementById('lab-lft') };
             
-            const doseSlider = document.getElementById('dose-slider');
-            const hud = {
-                dose: document.getElementById('hud-dose'),
-                eff: document.getElementById('hud-eff'),
-                tox: document.getElementById('hud-tox')
-            };
-            const zoneBadge = document.getElementById('zone-badge');
-            
-            const severitySlider = document.getElementById('severity-slider');
-            const syncBtn = document.getElementById('sync-btn');
+            const outDisease = document.getElementById('out-disease'), outCocktail = document.getElementById('out-cocktail'), outRationale = document.getElementById('out-rationale');
+            const doseSlider = document.getElementById('dose-slider'), hudDose = document.getElementById('hud-dose'), hudEff = document.getElementById('hud-eff'), hudTox = document.getElementById('hud-tox'), zoneBadge = document.getElementById('zone-badge');
+            const severitySlider = document.getElementById('severity-slider'), syncBtn = document.getElementById('sync-btn');
 
-            // Theme Management
             let isDark = false;
-            
-            function toggleTheme() {
+            themeToggle.addEventListener('click', () => {
                 isDark = !isDark;
-                if (isDark) {
-                    htmlTag.classList.add('dark');
-                    themeIcon.classList.replace('fa-moon', 'fa-sun');
-                    themeToggle.classList.replace('text-yellow-400', 'text-amber-500');
-                } else {
-                    htmlTag.classList.remove('dark');
-                    themeIcon.classList.replace('fa-sun', 'fa-moon');
-                    themeToggle.classList.replace('text-amber-500', 'text-yellow-400');
-                }
+                isDark ? htmlTag.classList.add('dark') : htmlTag.classList.remove('dark');
+                themeIcon.className = isDark ? 'fa-solid fa-sun w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center' : 'fa-solid fa-moon w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center';
+                themeToggle.className = isDark ? 'p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-amber-500 transition-colors shadow-inner' : 'p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-yellow-400 transition-colors shadow-inner';
                 updateChartTheme();
-            }
+            });
 
-            themeToggle.addEventListener('click', toggleTheme);
-
-            // Chart.js Setup
             const ctx = document.getElementById('doseChart').getContext('2d');
             const xRange = Array.from({length: 251}, (_, i) => i); 
-            
             let currentPeak = 100, currentCliff = 150, currentToxRate = 0.1;
-
-            function getEfficacy(peak) {
-                return xRange.map(x => Math.max(0, 98 - (0.006 * Math.pow(x - peak, 2))));
-            }
-
-            function getToxicity(cliff, toxRate) {
-                return xRange.map(x => x < cliff - 40 ? 0 : Math.min(100, Math.max(0, Math.exp((x - cliff) * toxRate))));
-            }
 
             let chart = new Chart(ctx, {
                 type: 'line',
@@ -358,102 +400,79 @@
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    scales: {
-                        x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
-                        y: { min: 0, max: 100, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
-                    },
+                    responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+                    scales: { x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b', maxTicksLimit: 8 } }, y: { min: 0, max: 100, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } } },
                     plugins: { tooltip: { enabled: false }, legend: { display: false } }
                 }
             });
 
             function updateChartTheme() {
-                const gridColor = isDark ? '#334155' : '#e2e8f0';
-                const tickColor = isDark ? '#94a3b8' : '#64748b';
-                chart.options.scales.x.grid.color = gridColor;
-                chart.options.scales.y.grid.color = gridColor;
-                chart.options.scales.x.ticks.color = tickColor;
-                chart.options.scales.y.ticks.color = tickColor;
-                chart.data.datasets[2].borderColor = isDark ? '#94a3b8' : '#cbd5e1';
-                chart.data.datasets[2].pointBackgroundColor = isDark ? '#1e293b' : '#ffffff';
+                const gridColor = isDark ? '#334155' : '#e2e8f0', tickColor = isDark ? '#94a3b8' : '#64748b';
+                chart.options.scales.x.grid.color = gridColor; chart.options.scales.y.grid.color = gridColor;
+                chart.options.scales.x.ticks.color = tickColor; chart.options.scales.y.ticks.color = tickColor;
+                chart.data.datasets[2].borderColor = isDark ? '#94a3b8' : '#cbd5e1'; chart.data.datasets[2].pointBackgroundColor = isDark ? '#1e293b' : '#ffffff';
                 chart.update();
             }
 
             function loadPatient(key) {
                 const data = db[key];
-                Object.keys(inputs).forEach(k => inputs[k].value = data.vitals[k]);
-                outputs.disease.textContent = data.name;
-                outputs.cocktail.textContent = data.cocktail;
-                outputs.rationale.textContent = data.rationale;
+                Object.keys(vitInputs).forEach(k => vitInputs[k].value = data.vit[k]);
+                Object.keys(labInputs).forEach(k => labInputs[k].value = data.lab[k]);
                 
-                currentPeak = data.curve.peak;
-                currentCliff = data.curve.cliff;
-                currentToxRate = data.curve.toxRate;
-                severitySlider.value = 50;
+                outDisease.textContent = data.name;
+                outCocktail.innerHTML = data.cocktail.map(drug => `<li><i class="fa-solid fa-pills mr-2 text-indigo-400"></i>${drug}</li>`).join('');
+                outRationale.textContent = data.rationale;
+                
+                currentPeak = data.curve.peak; currentCliff = data.curve.cliff; currentToxRate = data.curve.toxRate; severitySlider.value = 50;
                 drawCurves();
             }
 
             function drawCurves() {
-                chart.data.datasets[0].data = getEfficacy(currentPeak);
-                chart.data.datasets[1].data = getToxicity(currentCliff, currentToxRate);
-                chart.update();
-                doseSlider.dispatchEvent(new Event('input')); 
+                chart.data.datasets[0].data = xRange.map(x => Math.max(0, 98 - (0.006 * Math.pow(x - currentPeak, 2))));
+                chart.data.datasets[1].data = xRange.map(x => x < currentCliff - 40 ? 0 : Math.min(100, Math.max(0, Math.exp((x - currentCliff) * currentToxRate))));
+                chart.update(); doseSlider.dispatchEvent(new Event('input')); 
             }
 
-            // Interactions
             selectDisease.addEventListener('change', (e) => loadPatient(e.target.value));
 
             doseSlider.addEventListener('input', (e) => {
-                const dose = parseInt(e.target.value);
-                hud.dose.textContent = dose;
-                const eff = chart.data.datasets[0].data[dose].toFixed(1);
-                const tox = chart.data.datasets[1].data[dose].toFixed(1);
-                hud.eff.textContent = eff + '%';
-                hud.tox.textContent = tox + '%';
+                const dose = parseInt(e.target.value); hudDose.textContent = dose;
+                const eff = chart.data.datasets[0].data[dose].toFixed(1), tox = chart.data.datasets[1].data[dose].toFixed(1);
+                hudEff.textContent = eff + '%'; hudTox.textContent = tox + '%';
 
-                let dotArray = Array(251).fill(null);
-                dotArray[dose] = eff;
-                chart.data.datasets[2].data = dotArray;
-                chart.update('none');
+                let dotArray = Array(251).fill(null); dotArray[dose] = eff;
+                chart.data.datasets[2].data = dotArray; chart.update('none');
 
                 if (eff > 85 && tox < 15) {
                     zoneBadge.textContent = "OPTIMAL: Goldilocks Zone";
-                    zoneBadge.className = "px-3 py-1.5 rounded-lg font-black text-[10px] sm:text-xs uppercase tracking-wider shadow-md bg-emerald-500 text-white animate-pulse whitespace-nowrap";
+                    zoneBadge.className = "px-2 py-1 rounded bg-emerald-500 text-white font-bold text-[10px] uppercase tracking-wider animate-pulse";
                 } else if (tox >= 20) {
-                    zoneBadge.textContent = "WARNING: Toxicity Cliff";
-                    zoneBadge.className = "px-3 py-1.5 rounded-lg font-black text-[10px] sm:text-xs uppercase tracking-wider shadow-md bg-rose-600 text-white whitespace-nowrap";
+                    zoneBadge.textContent = "WARNING: Toxicity Risk";
+                    zoneBadge.className = "px-2 py-1 rounded bg-rose-600 text-white font-bold text-[10px] uppercase tracking-wider";
                 } else {
                     zoneBadge.textContent = eff > 50 ? "Sub-Optimal" : "Sub-Therapeutic";
-                    zoneBadge.className = "px-3 py-1.5 rounded-lg font-black text-[10px] sm:text-xs uppercase tracking-wider shadow-sm bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 whitespace-nowrap";
+                    zoneBadge.className = "px-2 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold text-[10px] uppercase tracking-wider";
                 }
             });
 
             syncBtn.addEventListener('click', () => {
-                const icon = syncBtn.querySelector('i');
-                icon.classList.add('fa-spin');
+                const icon = syncBtn.querySelector('i'); icon.classList.add('fa-spin', 'text-yellow-400');
                 const severityMod = (parseInt(severitySlider.value) - 50) / 2; 
                 const base = db[selectDisease.value].curve;
-                currentPeak = base.peak + severityMod;
-                currentCliff = base.cliff - (severityMod / 1.5); 
+                currentPeak = base.peak + severityMod; currentCliff = base.cliff - (severityMod / 1.5); 
 
                 setTimeout(() => {
-                    drawCurves();
-                    icon.classList.remove('fa-spin');
-                    syncBtn.classList.replace('bg-indigo-600', 'bg-emerald-500');
+                    drawCurves(); icon.classList.remove('fa-spin', 'text-yellow-400');
+                    syncBtn.classList.replace('bg-slate-900', 'bg-emerald-600');
                     syncBtn.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Recalibrated`;
                     setTimeout(() => {
-                        syncBtn.classList.replace('bg-emerald-500', 'bg-indigo-600');
-                        syncBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate mr-2"></i> Recalibrate Twin`;
+                        syncBtn.classList.replace('bg-emerald-600', 'bg-slate-900');
+                        syncBtn.innerHTML = `<i class="fa-solid fa-satellite-dish mr-2"></i> Sync Telemetry & Recalibrate`;
                     }, 2000);
                 }, 800);
             });
 
-            // Init
             loadPatient(selectDisease.value);
-            
-            // Handle window resize for canvas
             window.addEventListener('resize', () => chart.resize());
         });
     </script>
