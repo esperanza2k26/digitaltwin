@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Twin | Personalized Combination Therapy</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for the dynamic parabolic curves -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans h-screen flex flex-col overflow-hidden">
+
+    <!-- HEADER: Project Title and Creators -->
+    <header class="bg-slate-900 text-white p-4 shadow-md z-10 flex justify-between items-center shrink-0">
+        <div>
+            <h1 class="text-2xl font-bold text-blue-400">Evolution of Digital Twins[cite: 1]</h1>
+            <p class="text-sm text-slate-300">Advancing Personalized Combination Therapy through Identif.AI and CURATE.AI Algorithmic Platforms[cite: 1]</p>
+        </div>
+        <div class="text-right text-xs text-slate-400">
+            <p><strong>Presented by:</strong> Kasbodu Kavya & N. Srukesh Roshan[cite: 1]</p>
+          <!-- <p><strong>Digital Twin Lead:</strong> Ritesh</p> -->
+            <p>MRCP, Pharm.D 2nd Year[cite: 1]</p>
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD AREA -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- LEFT COLUMN: Theoretical Framework & Patient Data Input -->
+        <aside class="w-1/3 bg-white border-r border-slate-200 flex flex-col overflow-y-auto">
+            
+            <!-- Poster Concepts Section -->
+            <div class="p-6 border-b border-slate-200 bg-slate-50">
+                <h2 class="text-lg font-bold text-slate-800 mb-3"><i class="fa-solid fa-book-medical mr-2 text-blue-600"></i>The Core Concept</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p><strong>The Past:</strong> One-size-fits-all dosing and trial-and-error combinations[cite: 1].</p>
+                    <p><strong>The Present:</strong> Static biomarkers and genomic profiling (better, but still "snapshots")[cite: 1].</p>
+                    <p><strong>The Future:</strong> Digital Twins—dynamic, longitudinal virtual models that evolve with the patient using real-time feedback loops[cite: 1].</p>
+                </div>
+            </div>
+
+            <!-- Patient Profile Input Section -->
+            <div class="p-6 flex-1">
+                <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-user-injured mr-2 text-indigo-600"></i>Patient Phenotypic Profile[cite: 2]</h2>
+                <form id="patient-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Chief Complaint</label>
+                        <select id="disease-type" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                            <option value="oncology">Complex Oncology (Tumor Progression)[cite: 1]</option>
+                            <option value="infectious">Infectious Disease (Drug-Resistant)[cite: 1]</option>
+                            <option value="transplant">Transplant Medicine (Immunosuppression)[cite: 1]</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Heart Rate (BPM)</label>
+                            <input type="number" id="vitals-hr" value="88" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Blood Pressure</label>
+                            <input type="text" id="vitals-bp" value="130/85" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Key Phenotypic Marker Level</label>
+                        <div class="flex items-center space-x-2 mt-1">
+                            <input type="range" id="biomarker-slider" min="10" max="100" value="75" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                            <span id="biomarker-val" class="text-sm font-bold text-slate-700 w-8 text-right">75</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Simulates blood markers/tumor size changing over time[cite: 2].</p>
+                    </div>
+
+                    <button type="button" id="update-model-btn" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 transition duration-200 mt-4 shadow">
+                        Update Digital Twin Model <i class="fa-solid fa-rotate ml-1"></i>
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- RIGHT COLUMN: Algorithmic Engine Outputs -->
+        <main class="w-2/3 bg-slate-100 p-6 overflow-y-auto space-y-6">
+            
+            <!-- IDENTIF.AI SECTION -->
+            <section class="glass-panel p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-indigo-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-indigo-800">Identif.AI (Discovery Platform)[cite: 1]</h3>
+                        <p class="text-sm text-slate-600">Combinatorial Optimization using orthogonal arrays to predict synergistic relationships[cite: 1].</p>
+                    </div>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-indigo-200">Pre-Clinical / System</span>
+                </div>
+                
+                <div class="bg-slate-900 rounded-lg p-4 font-mono text-sm text-green-400 shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent opacity-50 animate-pulse"></div>
+                    <p class="text-slate-400 mb-2">// Algorithmic Cocktail Selection[cite: 1]</p>
+                    <div id="identifai-output" class="space-y-1">
+                        <p>> Analyzing orthogonal array space for N-of-1...</p>
+                        <p>> Target: <span id="target-disease" class="text-white">Complex Oncology</span></p>
+                        <p>> Synergistic Combination Found:</p>
+                        <p class="text-yellow-300 font-bold mt-2 ml-4">> Regimen: [ Drug A (Targeted) + Drug B (Immunomodulator) ]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CURATE.AI SECTION -->
+            <section class="glass-panel p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-emerald-500">
+                 <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-emerald-800">CURATE.AI (Personalization Platform)[cite: 1]</h3>
+                        <p class="text-sm text-slate-600">N-of-1 Modeling mapping the parabolic dose-response curve[cite: 1].</p>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Clinical Point-of-Care</span>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-inner relative">
+                    <canvas id="doseResponseChart" height="100"></canvas>
+                    
+                    <!-- Dynamic Readout Overlays -->
+                    <div class="absolute top-6 right-6 bg-white/90 p-3 rounded border border-slate-200 shadow-sm text-sm">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-slate-500 mr-4">Current Efficacy:</span>
+                            <span id="readout-efficacy" class="font-bold text-emerald-600">0%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 mr-4">Toxicity Risk:</span>
+                            <span id="readout-toxicity" class="font-bold text-rose-600">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Output Controller (The Dosing Slider) -->
+                <div class="mt-6 bg-slate-50 p-5 rounded-lg border border-slate-200">
+                    <div class="flex justify-between items-end mb-2">
+                        <label for="clinical-dose-slider" class="block text-sm font-bold text-slate-700">
+                            Clinical Output: Modulate Drug Intensity[cite: 1]
+                        </label>
+                        <span id="zone-status" class="text-xs font-bold px-2 py-1 rounded bg-slate-200 text-slate-600">Sub-therapeutic</span>
+                    </div>
+                    
+                    <input type="range" id="clinical-dose-slider" min="0" max="200" value="0" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <div class="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                        <span>0 mg</span>
+                        <span class="font-bold text-emerald-700">Selected Dose: <span id="current-dose-val" class="text-lg">0</span> mg</span>
+                        <span>200 mg</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3 italic text-center">Goal: Real-time dose adjustments that maximize efficacy while minimizing toxicity (the "Goldilocks Zone")[cite: 1].</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT SIMULATION LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // UI Elements
+            const diseaseSelect = document.getElementById('disease-type');
+            const targetDiseaseText = document.getElementById('target-disease');
+            const identifaiOutput = document.getElementById('identifai-output');
+            const biomarkerSlider = document.getElementById('biomarker-slider');
+            const biomarkerVal = document.getElementById('biomarker-val');
+            const updateBtn = document.getElementById('update-model-btn');
+            
+            const doseSlider = document.getElementById('clinical-dose-slider');
+            const currentDoseVal = document.getElementById('current-dose-val');
+            const readoutEfficacy = document.getElementById('readout-efficacy');
+            const readoutToxicity = document.getElementById('readout-toxicity');
+            const zoneStatus = document.getElementById('zone-status');
+
+            // --- IDENTIF.AI SIMULATION LOGIC ---
+            const cocktails = {
+                oncology: "[ Fluorouracil (5-FU) + Oxaliplatin ]",
+                infectious: "[ Meropenem + Polymyxin B ]",
+                transplant: "[ Tacrolimus + Mycophenolate Mofetil ]"
+            };
+
+            diseaseSelect.addEventListener('change', (e) => {
+                const selected = e.target.options[e.target.selectedIndex].text;
+                targetDiseaseText.textContent = selected;
+                
+                // Simulate processing delay for effect
+                identifaiOutput.innerHTML = `<p class="text-slate-400">> Re-calculating orthogonal array space...</p>`;
+                setTimeout(() => {
+                    identifaiOutput.innerHTML = `
+                        <p>> Target: <span class="text-white">${selected}</span></p>
+                        <p>> Synergistic Combination Found:</p>
+                        <p class="text-yellow-300 font-bold mt-2 ml-4">> Regimen: ${cocktails[e.target.value]}</p>
+                    `;
+                }, 600);
+            });
+
+            biomarkerSlider.addEventListener('input', (e) => {
+                biomarkerVal.textContent = e.target.value;
+            });
+
+            // --- CURATE.AI CHART.JS SIMULATION ---
+            const ctx = document.getElementById('doseResponseChart').getContext('2d');
+            
+            // X-Axis: Doses 0 to 200mg
+            const doseRange = Array.from({length: 201}, (_, i) => i); 
+            
+            // Base state variables for the math curves
+            let peakEfficacyDose = 110; 
+            let toxicityCliffStart = 130;
+
+            // Generate Parabolic Efficacy Data ( y = a(x-h)^2 + k )
+            function generateEfficacy(peakX, maxEff) {
+                return doseRange.map(x => {
+                    let y = maxEff - (0.008 * Math.pow(x - peakX, 2));
+                    return y < 0 ? 0 : y;
+                });
+            }
+
+            // Generate Exponential Toxicity Data (The "Cliff")[cite: 1, 2]
+            function generateToxicity(cliffX) {
+                return doseRange.map(x => {
+                    if (x < cliffX - 30) return 0;
+                    let y = Math.exp((x - cliffX) * 0.1) * 2;
+                    return y > 100 ? 100 : (y < 0 ? 0 : y);
+                });
+            }
+
+            let efficacyData = generateEfficacy(peakEfficacyDose, 95);
+            let toxicityData = generateToxicity(toxicityCliffStart);
+
+            // Initialize Chart
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: doseRange,
+                    datasets: [
+                        {
+                            label: 'Efficacy (Parabolic Curve)',
+                            data: efficacyData,
+                            borderColor: '#10b981', // Emerald 500
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHitRadius: 10
+                        },
+                        {
+                            label: 'Toxicity Risk (The Cliff)',
+                            data: toxicityData,
+                            borderColor: '#e11d48', // Rose 600
+                            backgroundColor: 'rgba(225, 29, 72, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHitRadius: 10
+                        },
+                        // Dynamic Marker for the Slider
+                        {
+                            label: 'Current Administered Dose',
+                            data: Array(201).fill(null),
+                            borderColor: '#3b82f6',
+                            backgroundColor: '#1e3a8a',
+                            borderWidth: 2,
+                            pointRadius: 6,
+                            pointStyle: 'circle',
+                            showLine: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } },
+                        tooltip: { enabled: false } // Custom readouts used instead
+                    },
+                    scales: {
+                        x: { title: { display: true, text: 'Drug Intensity / Dose (mg)' } },
+                        y: { title: { display: true, text: 'Response Level (%)' }, min: 0, max: 100 }
+                    }
+                }
+            });
+
+            // Handle Slider Movement
+            doseSlider.addEventListener('input', (e) => {
+                const dose = parseInt(e.target.value);
+                currentDoseVal.textContent = dose;
+
+                // Get Y values for current dose
+                const effVal = efficacyData[dose].toFixed(1);
+                const toxVal = toxicityData[dose].toFixed(1);
+
+                readoutEfficacy.textContent = effVal + '%';
+                readoutToxicity.textContent = toxVal + '%';
+
+                // Update the marker on the chart
+                let markerData = Array(201).fill(null);
+                markerData[dose] = effVal; // Snap marker to efficacy curve
+                chart.data.datasets[2].data = markerData;
+                chart.update('none'); // Update without full animation
+
+                // Update "Goldilocks Zone" Status[cite: 1]
+                if (effVal > 80 && toxVal < 20) {
+                    zoneStatus.textContent = "Optimal (Goldilocks Zone)";
+                    zoneStatus.className = "text-xs font-bold px-2 py-1 rounded bg-emerald-100 text-emerald-700 border border-emerald-300 shadow-sm transition-all";
+                } else if (toxVal >= 20) {
+                    zoneStatus.textContent = "DANGER: High Toxicity";
+                    zoneStatus.className = "text-xs font-bold px-2 py-1 rounded bg-rose-100 text-rose-700 border border-rose-300 shadow-sm animate-pulse";
+                } else if (effVal > 40) {
+                    zoneStatus.textContent = "Therapeutic, but Sub-Optimal";
+                    zoneStatus.className = "text-xs font-bold px-2 py-1 rounded bg-yellow-100 text-yellow-700 border border-yellow-300 transition-all";
+                } else {
+                    zoneStatus.textContent = "Sub-therapeutic";
+                    zoneStatus.className = "text-xs font-bold px-2 py-1 rounded bg-slate-200 text-slate-600 transition-all";
+                }
+            });
+
+            // Simulate "Dynamic Calibration" from the poster[cite: 1]
+            updateBtn.addEventListener('click', () => {
+                const baseShift = parseInt(biomarkerSlider.value) / 2; 
+                
+                // Shift the curves based on simulated patient biological changes
+                peakEfficacyDose = 80 + baseShift; 
+                toxicityCliffStart = 100 + baseShift;
+
+                efficacyData = generateEfficacy(peakEfficacyDose, 90 + (Math.random() * 10));
+                toxicityData = generateToxicity(toxicityCliffStart);
+
+                chart.data.datasets[0].data = efficacyData;
+                chart.data.datasets[1].data = toxicityData;
+                
+                // Re-trigger the slider event to update UI markers with new curve data
+                doseSlider.dispatchEvent(new Event('input'));
+                chart.update();
+                
+                // Button effect
+                updateBtn.innerHTML = `Calibrated Successfully <i class="fa-solid fa-check ml-1"></i>`;
+                updateBtn.classList.replace('bg-indigo-600', 'bg-emerald-500');
+                updateBtn.classList.replace('hover:bg-indigo-700', 'hover:bg-emerald-600');
+                
+                setTimeout(() => {
+                    updateBtn.innerHTML = `Update Digital Twin Model <i class="fa-solid fa-rotate ml-1"></i>`;
+                    updateBtn.classList.replace('bg-emerald-500', 'bg-indigo-600');
+                    updateBtn.classList.replace('hover:bg-emerald-600', 'hover:bg-indigo-700');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
